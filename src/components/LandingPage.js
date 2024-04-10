@@ -70,45 +70,45 @@ function LandingPage() {
                 setShowNavbar(true); // Show Navbar when scrolling down
 
                 const aesthetixTexts = document.querySelectorAll('.aesthetix-text');
-            aesthetixTexts.forEach((text) => {
-              text.style.fontSize = '25px'; // Set the desired font size
-              text.style.position = 'fixed'; // Position fixed to top left
-              text.style.left = '60px';
-              text.style.top = '40px';
-            });
-            // Select the element with the class 'navbar'
-            // Select the element with the class 'navbar'
-            const navbar = document.querySelector('.navbar');
+                aesthetixTexts.forEach((text) => {
+                    text.style.fontSize = '61px'; // Set the desired font size
+                    text.style.position = 'fixed'; // Position fixed to top left
+                    text.style.left = '133px';
+                    text.style.top = '40px';
+                });
+                // Select the element with the class 'navbar'
+                // Select the element with the class 'navbar'
+                const navbar = document.querySelector('.navbar');
 
-            // Check if the element is found
-            if (navbar) {
-            // Set initial opacity (if needed)
-            navbar.style.opacity = 0; // Start from 0 for a fade-in effect
+                // Check if the element is found
+                if (navbar) {
+                    // Set initial opacity (if needed)
+                    navbar.style.opacity = 0; // Start from 0 for a fade-in effect
 
-            // Define the number of frames and the duration
-            const duration = 10000; // Duration of the animation in milliseconds
-            const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
+                    // Define the number of frames and the duration
+                    const duration = 10000; // Duration of the animation in milliseconds
+                    const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
 
-            // Calculate the increment value to reach the final opacity
-            const targetOpacity = 1;
-            const increment = (targetOpacity - parseFloat(navbar.style.opacity)) / frames;
+                    // Calculate the increment value to reach the final opacity
+                    const targetOpacity = 1;
+                    const increment = (targetOpacity - parseFloat(navbar.style.opacity)) / frames;
 
-            // Function to animate opacity using requestAnimationFrame
-            function animateOpacity(timestamp) {
-                const currentOpacity = parseFloat(navbar.style.opacity);
-                const newOpacity = currentOpacity + increment;
+                    // Function to animate opacity using requestAnimationFrame
+                    function animateOpacity(timestamp) {
+                        const currentOpacity = parseFloat(navbar.style.opacity);
+                        const newOpacity = currentOpacity + increment;
 
-                if (newOpacity <= targetOpacity) {
-                navbar.style.opacity = newOpacity;
-                requestAnimationFrame(animateOpacity);
-                } else {
-                navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
+                        if (newOpacity <= targetOpacity) {
+                            navbar.style.opacity = newOpacity;
+                            requestAnimationFrame(animateOpacity);
+                        } else {
+                            navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
+                        }
+                    }
+
+                    // Start the animation
+                    requestAnimationFrame(animateOpacity);
                 }
-            }
-
-            // Start the animation
-            requestAnimationFrame(animateOpacity);
-            }
 
 
 
