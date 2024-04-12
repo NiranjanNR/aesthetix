@@ -107,3 +107,125 @@ body{
 .navbar-links li a:hover {
   text-decoration: underline;
 }
+
+
+.container {
+  display: flex;
+  align-items: stretch; /* Stretch items vertically */
+}
+
+.content {
+  flex: 1; /* Take up remaining space */
+  padding: 20px; /* Optional: Add padding around content */
+}
+
+.image-section {
+  position: sticky;
+  top: 0;
+	height: 100vh;
+  display: grid;
+  place-items: center;
+  flex: 1; /* Take up remaining space */
+  display: flex;
+  justify-content: center; /* Center image horizontally */
+  align-items: center; /* Center image vertically */
+}
+
+.image-section img {
+  max-width: 100%; /* Ensure image does not exceed container width */
+  max-height: 100%; /* Ensure image does not exceed container height */
+}
+
+/* NEW */
+@font-face {
+  font-family: "Geist Sans";
+  src: url("https://assets.codepen.io/605876/GeistVF.ttf") format("truetype");
+}
+
+:root {
+  --bg: hsl(0 0% 2%);
+  --color: hsl(0 0% 100% / 0.1);
+  --underline-width: 1lh;
+  --underline-block-width: 200vmax;
+  --underline-color: hsl(0 0% 50% / 0.15);
+  --underline-color-hover: hsl(180 100% 50% / 1);
+  --underline-transition: 5s;
+  --finish-fill: hsl(0 0% 100%);
+  --accent: hsl(0 0% 100%);
+  --fill: hsl(0 0% 50%);
+}
+
+
+p {
+  resize: both;
+  max-width: 70vw;
+  overflow: hidden;
+  padding: 10ch;
+	margin: 0;
+}
+
+p > span {
+	outline-color: hsl(10 80% 50%);
+	outline-offset: 1ch;
+	font-size: clamp(3rem, 4vw + 0.5rem, 10rem);
+  color: var(--color);
+  text-decoration: none;
+  background-image:
+		/* First one is the highlight */
+		linear-gradient(90deg, transparent calc(100% - 8ch), var(--accent) calc(100%  - 8ch)),
+  	linear-gradient(90deg, var(--fill), var(--fill)),
+    linear-gradient(90deg, var(--underline-color), var(--underline-color));
+  background-size:
+  	var(--underline-block-width) var(--underline-width),
+  	var(--underline-block-width) var(--underline-width),
+    100% var(--underline-width);
+  background-repeat: no-repeat;
+  background-position-x: 0;
+  background-position-y: 100%;
+  background-clip: text;
+  color: var(--finish-fill);
+}
+
+main {
+  height: 200vh;
+  text-shadow: none;
+}
+
+section {
+  position: sticky;
+  top: 0;
+	height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main {
+      view-timeline-name: --section;
+    }
+    
+    p > span {
+      background-position-x:
+        calc(var(--underline-block-width) * -1),
+        calc(var(--underline-block-width) * -1),
+        0;
+      color: transparent;
+      animation-name: fill-up, color-in;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    	animation-timeline: --section;
+    	animation-range: entry 100% cover 50%, cover 50% exit 0%;
+    }
+
+    @keyframes fill-up {
+    	to { background-position-x: 0, 0, 0; }
+    }
+
+    @keyframes color-in {
+    	to { color: var(--finish-fill); }
+    }
+  }
+}
+
