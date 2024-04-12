@@ -105,7 +105,7 @@ function LandingPage() {
                             navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
                         }
                     }
-
+                    
                     // Start the animation
                     requestAnimationFrame(animateOpacity);
                 }
