@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="">
       <ParallaxProvider>
-        {/* <Landingpage /> */}
-        <ScrollAnimation/>
+        <Landingpage />
+        {/* <ScrollAnimation/> */}
       </ParallaxProvider>
     </div>
   );

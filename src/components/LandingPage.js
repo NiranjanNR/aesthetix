@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import Navbar from './navbar';
+import Narration from './ScrollAnimation'
 
 function LandingPage() {
     const [textStates, setTextStates] = useState([
@@ -105,7 +106,7 @@ function LandingPage() {
                             navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
                         }
                     }
-                    
+
                     // Start the animation
                     requestAnimationFrame(animateOpacity);
                 }
@@ -126,25 +127,30 @@ function LandingPage() {
         };
     }, [lastScrollTop]);
     return (
+        <div>
         <div className="app-container overflow-y-auto flex justify-center items-center">
-            <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
-                <Navbar />
-            </div>
-            <div className="text-container gap-14">
-                {textStates.map((textState, index) => (
-                    <h1
-                        key={index}
-                        className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
-                        style={{ transitionDelay: `${index * 0.5}s` }}
-                    >
-                        <div className='text-8xl font-semibold'>{textState.text}.</div>
-                    </h1>
-                ))}
-            </div>
-            {showAesthetix && (
-                <h1 className="aesthetix-text">Aesthetix</h1>
-            )}
+                    <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
+                        <Navbar />
+                    </div>
+                    <div className="text-container gap-14">
+                        {textStates.map((textState, index) => (
+                            <h1
+                                key={index}
+                                className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
+                                style={{ transitionDelay: `${index * 0.5}s` }}
+                            >
+                                <div className='text-8xl font-semibold'>{textState.text}.</div>
+                            </h1>
+                        ))}
+                    </div>
+                    {showAesthetix && (
+                        <h1 className="aesthetix-text">Aesthetix</h1>
+                    )}
         </div>
+        
+        <Narration />
+        </div>
+        
     );
 }
 export default LandingPage;
