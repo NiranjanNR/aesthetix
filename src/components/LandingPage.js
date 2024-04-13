@@ -22,7 +22,7 @@ function LandingPage() {
     const [already, setAlready] = useState(true);
     const [already2, setAlready2] = useState(false);
 
-    
+
 
     const fadeInTexts = () => {
         setTextStates(prevStates => {
@@ -40,8 +40,8 @@ function LandingPage() {
             }, 2900); // Adjust timing based on your animation duration
         }, 2900); // Same delay as setShowAesthetix
     };
-    
-    
+
+
 
     useEffect(() => {
         fadeInTexts();
@@ -79,7 +79,11 @@ function LandingPage() {
 
     useEffect(() => {
         let timeoutId;
-    
+
+        if (already) {
+            const leading = document.querySelectorAll('.leading');
+        }
+
         if (showAesthetix) {
             // Delay the style modifications after the animation completes (2900ms delay)
             timeoutId = setTimeout(() => {
@@ -89,17 +93,18 @@ function LandingPage() {
                     text.style.position = 'fixed';
                     text.style.left = '50%';
                     text.style.top = '6%';
+                    setAlready(false)
                 });
             }, 2000);
         }
-    
+
         return () => {
             // Clean up the timeout to avoid memory leaks
             clearTimeout(timeoutId);
         };
     }, [showAesthetix]);
-    
-    
+
+
 
     return (
         <div className='flex justify-center h-[100vh] w-[100%] '>
@@ -133,32 +138,20 @@ function LandingPage() {
                                 </div>
                                 :
                                 <div className='leading'>
-                                <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
-                                    <div className='mb-10 animate-fade-in'>
-                                    <div>Leaders in Smart</div>
-                                    <div className='mt-[-40px]'>Technology Solutions</div>
+                                    <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
+                                        <div className='mb-10 animate-fade-in'>
+                                            <div>Leaders in Smart</div>
+                                            <div className='mt-[-40px]'>Technology Solutions</div>
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                         }
 
 
-                {showAesthetix && (
-                    <h3 className="aesthetix-text">Aesthetix</h3>
-                )}
+                        {showAesthetix && (
+                            <h3 className="aesthetix-text">Aesthetix</h3>
+                        )}
 
-                {
-                    already2 && showAesthetix && (
-                        <div className='leading'>
-                            <div className='gradient-text font-bold text-center flex justify-center items-center'>
-                                <div >
-                                    <div>Leaders in Smart</div>
-                                    <div>Technology Solutions</div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                }
                     </div>
                     <Narration />
                     <Narration2 />
