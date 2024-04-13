@@ -71,12 +71,20 @@ function LandingPage() {
 
                 const aesthetixTexts = document.querySelectorAll('.aesthetix-text');
                 aesthetixTexts.forEach((text) => {
-                    text.style.fontSize = '61px'; // Set the desired font size
+                    text.style.fontSize = '51px'; // Set the desired font size
                     text.style.position = 'fixed'; // Position fixed to top left
                     text.style.left = '133px';
                     text.style.top = '40px';
+                    text.style.color = '#A3227F'
                 });
-                // Select the element with the class 'navbar'
+
+
+                const app_container = document.querySelector('.app-container');
+
+                if (app_container) {
+                    app_container.style.backgroundColor = '#F7EDE4'
+                }
+
                 // Select the element with the class 'navbar'
                 const navbar = document.querySelector('.navbar');
 
@@ -130,14 +138,14 @@ function LandingPage() {
             <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
                 <Navbar />
             </div>
-            <div className="text-container gap-14">
+            <div className="text-container gap-10">
                 {textStates.map((textState, index) => (
                     <h1
                         key={index}
                         className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
                         style={{ transitionDelay: `${index * 0.5}s` }}
                     >
-                        <div className='text-8xl font-semibold'>{textState.text}.</div>
+                        <div className='text-6xl font-semibold'>{textState.text}.</div>
                     </h1>
                 ))}
             </div>
