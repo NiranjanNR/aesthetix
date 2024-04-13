@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import Narration from './ScrollAnimation'
+import Narration2 from './ScrollAnimation2'
 import Leading from './Leading';
 
 
@@ -214,6 +215,7 @@ function LandingPage() {
                 )}
             </div>
             <Narration />
+            <Narration2 />
         </div>
 
     );
