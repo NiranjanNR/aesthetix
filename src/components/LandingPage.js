@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
-import Navbar from './navbar';
 import Narration from './ScrollAnimation'
+import Leading from './Leading';
+
 
 function LandingPage() {
     const [textStates, setTextStates] = useState([
@@ -14,6 +15,8 @@ function LandingPage() {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [lastScrollTop, setLastScrollTop] = useState(0);
     const [showNavbar, setShowNavbar] = useState(false); // State for Navbar visibility
+    const [already, setAlready] = useState(true);
+    const [already2, setAlready2] = useState(true);
 
     const fadeInTexts = () => {
         setTextStates(prevStates => {
@@ -81,13 +84,16 @@ function LandingPage() {
                 // Select the element with the class 'navbar'
                 const navbar = document.querySelector('.navbar');
 
+                const leading = document.querySelector('.leading');
+
                 // Check if the element is found
-                if (navbar) {
+                if (navbar && already) {
+                    setAlready(false);
                     // Set initial opacity (if needed)
                     navbar.style.opacity = 0; // Start from 0 for a fade-in effect
 
                     // Define the number of frames and the duration
-                    const duration = 10000; // Duration of the animation in milliseconds
+                    const duration = 1000; // Duration of the animation in milliseconds
                     const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
 
                     // Calculate the increment value to reach the final opacity
@@ -104,6 +110,37 @@ function LandingPage() {
                             requestAnimationFrame(animateOpacity);
                         } else {
                             navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
+                        }
+                    }
+
+                    // Start the animation
+                    requestAnimationFrame(animateOpacity);
+                }
+
+                if (leading && already2) {
+                    setAlready2(false);
+                    console.log(1);
+                    // Set initial opacity (if needed)
+                    leading.style.opacity = 0; // Start from 0 for a fade-in effect
+
+                    // Define the number of frames and the duration
+                    const duration = 1000; // Duration of the animation in milliseconds
+                    const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
+
+                    // Calculate the increment value to reach the final opacity
+                    const targetOpacity = 1;
+                    const increment = (targetOpacity - parseFloat(leading.style.opacity)) / frames;
+
+                    // Function to animate opacity using requestAnimationFrame
+                    function animateOpacity(timestamp) {
+                        const currentOpacity = parseFloat(leading.style.opacity);
+                        const newOpacity = currentOpacity + increment;
+
+                        if (newOpacity <= targetOpacity) {
+                            leading.style.opacity = newOpacity;
+                            requestAnimationFrame(animateOpacity);
+                        } else {
+                            leading.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
                         }
                     }
 
@@ -128,29 +165,57 @@ function LandingPage() {
     }, [lastScrollTop]);
     return (
         <div>
-        <div className="app-container overflow-y-auto flex justify-center items-center">
-                    <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
-                        <Navbar />
+            <div className="app-container overflow-y-auto flex justify-center items-center">
+                <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
+                    <div className='navbar text-black md:mx-3'>
+                        <div className='py-4 flex justify-center items-center h-[7vh]'>
+                            <div className='hidden md:flex font-semibold text-md'>
+                                <div>
+                                    <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>About us</button>
+                                </div>
+                                <div>
+                                    <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Discover</button>
+                                </div>
+                                <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Support</button>
+                                <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Blog</button>
+                            </div>
+                            <div className='md:hidden'>
+                            </div>
+                        </div>
                     </div>
-                    <div className="text-container gap-14">
-                        {textStates.map((textState, index) => (
-                            <h1
-                                key={index}
-                                className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
-                                style={{ transitionDelay: `${index * 0.5}s` }}
-                            >
-                                <div className='text-8xl font-semibold'>{textState.text}.</div>
-                            </h1>
-                        ))}
-                    </div>
-                    {showAesthetix && (
-                        <h1 className="aesthetix-text">Aesthetix</h1>
-                    )}
+                </div>
+                {
+                    already ?
+                        <div className="text-container gap-14" >
+                            {textStates.map((textState, index) => (
+                                <h1
+                                    key={index}
+                                    className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
+                                    style={{ transitionDelay: `${index * 0.5}s` }}
+                                >
+                                    <div className='text-8xl font-semibold'>{textState.text}.</div>
+                                </h1>
+                            ))}
+                        </div>
+                        :
+                        <div className='leading'>
+                            <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
+                                <div className='mb-10'>
+                                    <div className=''>Leaders in Smart</div>
+                                    <div className='mt-[-40px]'>Technology Solutions</div>
+                                </div>
+                            </div>
+                        </div>
+                }
+
+
+                {showAesthetix && (
+                    <h3 className="aesthetix-text">Aesthetix</h3>
+                )}
+            </div>
+            <Narration />
         </div>
-        
-        <Narration />
-        </div>
-        
+
     );
 }
 export default LandingPage;

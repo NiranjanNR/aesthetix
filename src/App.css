@@ -19,6 +19,12 @@
 
 }
 
+.gradient-text {
+  background: linear-gradient(90deg, #BC6E94, #5A0D57); /* Gradient colors */
+  -webkit-background-clip: text; /* Set background clip to text */
+  -webkit-text-fill-color: transparent; /* Fill text with the background color */
+
+}
 
 
 .text-container {
@@ -55,6 +61,22 @@
   padding: 1rem;
 }
 
+
+.aesthetix-text-2 {
+  opacity: 0;          /* Start with opacity set to 0 */
+  animation: fadeIn 3s forwards; 
+  text-shadow: 0 0 36px rgb(190, 112, 168); /* Use the fadeIn animation with a duration of 3 seconds */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fade-in-zoom {
   from {
     opacity: 0;
@@ -67,23 +89,17 @@
 }
 
 body{
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  text-shadow: 0 0 13px rgb(186, 151, 176); 
+  background-color: rgb(254, 241, 241);
+  color: rgb(0, 0, 0);
+  
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #000000;
-  padding: 1rem;
+.trans{
+  transition: opacity 2s ease;
 }
-
-
 
 .navbar-logo a {
-  color: #fff;
+  color: #000000;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.2rem;
@@ -99,7 +115,7 @@ body{
 }
 
 .navbar-links li a {
-  color: white;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   font-size: 1rem;
 }
@@ -229,3 +245,101 @@ section {
   }
 }
 
+/* NAVBAR */
+
+.login{
+    height: 100vh;
+    background-color: rgb(15, 15, 19,0.999);
+}
+.sign-up{
+    color: #4338ca;
+}
+.sign-up:hover{
+    color: #4f42dc;
+}
+.input{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 66px;
+    width: 400px;
+    border-radius: 5px;
+}
+.login-button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+    height: 66px;
+    width: 400px;
+    border-radius: 5px;
+}
+.login-button2{
+
+    letter-spacing: 0.5px;
+    height: 60px;
+    width: 400px;
+}
+.border1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 64px;
+    width: 404px;
+    position: relative;
+    background: linear-gradient(to right, rgb(51, 196, 22), rgb(243, 255, 79));
+    border-radius: 4px;
+    padding: 1px;
+}
+.border2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 64px;
+    width: 404px;
+    position: relative;
+    background: linear-gradient(to left, rgb(226, 255, 180), rgb(253 230 138));
+    border-radius: 4px;
+    padding: 2px;
+}
+.border3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 64px;
+    width: 404px;
+    position: relative;
+    background: linear-gradient(to right, rgb(125, 202, 0), rgb(255, 235, 155));
+    border-radius: 4px;
+    padding: 2px;
+}
+.inner{
+    background: rgb(15, 15, 19,0.999);
+    border-radius: 4px;
+}
+
+.hover-underline-animation {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: all 0.5s;
+
+  }
+  
+.hover-underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 25%;
+    background-color: #4338ca;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+  
+.hover-underline-animation:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.hover-underline-animation:active{
+    transition: all 0.5s;
+    transform: scale(0.9);
+}
