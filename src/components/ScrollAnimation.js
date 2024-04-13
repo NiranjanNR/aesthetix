@@ -8,11 +8,8 @@ const App = () => {
         <section>
           <p>
             <span contentEditable={true}>
-              Vishaal is the King 
-              Vishaal is the King
-              Vishaal is the King
-              Vishaal is the King
-              Vishaal is the King
+            At Aesthetix Technologies, 
+            we are re imagining communication and collaboration to design work and living spaces of the 21st century. 
             </span>
           </p>
         </section>
@@ -20,7 +17,7 @@ const App = () => {
       <div className="image-section">
         {/* Add your image here */}
         {/* For example: */}
-        <img src="king.jpeg" alt="Image" />
+        <img src="aesthetix.jpeg" alt="Image" />
       </div>
     </div>
   );

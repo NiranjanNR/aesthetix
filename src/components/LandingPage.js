@@ -20,7 +20,9 @@ function LandingPage() {
     const [lastScrollTop, setLastScrollTop] = useState(0);
     const [showNavbar, setShowNavbar] = useState(false); // State for Navbar visibility
     const [already, setAlready] = useState(true);
-    const [already2, setAlready2] = useState(true);
+    const [already2, setAlready2] = useState(false);
+
+    
 
     const fadeInTexts = () => {
         setTextStates(prevStates => {
@@ -33,8 +35,13 @@ function LandingPage() {
     const fadeAesthetix = () => {
         setTimeout(() => {
             setShowAesthetix(true);
-        }, 2900);
+            setTimeout(() => {
+                setAlready2(true); // Show leading text after Aesthetix animation
+            }, 2900); // Adjust timing based on your animation duration
+        }, 2900); // Same delay as setShowAesthetix
     };
+    
+    
 
     useEffect(() => {
         fadeInTexts();
@@ -71,109 +78,29 @@ function LandingPage() {
     }, [fadeOut]);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (currentScrollTop > lastScrollTop) {
-                // Scrolling down
-                setShowNavbar(true); // Show Navbar when scrolling down
-
+        let timeoutId;
+    
+        if (showAesthetix) {
+            // Delay the style modifications after the animation completes (2900ms delay)
+            timeoutId = setTimeout(() => {
                 const aesthetixTexts = document.querySelectorAll('.aesthetix-text');
                 aesthetixTexts.forEach((text) => {
-                    text.style.fontSize = '51px'; // Set the desired font size
-                    text.style.position = 'fixed'; // Position fixed to top left
-                    text.style.left = '817px';
-                    text.style.top = '60px';
+                    text.style.fontSize = '51px';
+                    text.style.position = 'fixed';
+                    text.style.left = '50%';
+                    text.style.top = '6%';
                 });
-
-
-                const app_container = document.querySelector('.app-container');
-
-                if (app_container) {
-
-                }
-
-                // Select the element with the class 'navbar'
-                const navbar = document.querySelector('.navbar');
-
-                const leading = document.querySelector('.leading');
-
-                // Check if the element is found
-                if (navbar && already) {
-                    setAlready(false);
-                    // Set initial opacity (if needed)
-                    navbar.style.opacity = 0; // Start from 0 for a fade-in effect
-
-                    // Define the number of frames and the duration
-                    const duration = 1000; // Duration of the animation in milliseconds
-                    const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
-
-                    // Calculate the increment value to reach the final opacity
-                    const targetOpacity = 1;
-                    const increment = (targetOpacity - parseFloat(navbar.style.opacity)) / frames;
-
-                    // Function to animate opacity using requestAnimationFrame
-                    function animateOpacity(timestamp) {
-                        const currentOpacity = parseFloat(navbar.style.opacity);
-                        const newOpacity = currentOpacity + increment;
-
-                        if (newOpacity <= targetOpacity) {
-                            navbar.style.opacity = newOpacity;
-                            requestAnimationFrame(animateOpacity);
-                        } else {
-                            navbar.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
-                        }
-                    }
-
-                    // Start the animation
-                    requestAnimationFrame(animateOpacity);
-                }
-
-                if (leading && already2) {
-                    setAlready2(false);
-                    console.log(1);
-                    // Set initial opacity (if needed)
-                    leading.style.opacity = 0; // Start from 0 for a fade-in effect
-
-                    // Define the number of frames and the duration
-                    const duration = 1000; // Duration of the animation in milliseconds
-                    const frames = duration / 16; // Assuming 60 frames per second (1000ms / 16ms)
-
-                    // Calculate the increment value to reach the final opacity
-                    const targetOpacity = 1;
-                    const increment = (targetOpacity - parseFloat(leading.style.opacity)) / frames;
-
-                    // Function to animate opacity using requestAnimationFrame
-                    function animateOpacity(timestamp) {
-                        const currentOpacity = parseFloat(leading.style.opacity);
-                        const newOpacity = currentOpacity + increment;
-
-                        if (newOpacity <= targetOpacity) {
-                            leading.style.opacity = newOpacity;
-                            requestAnimationFrame(animateOpacity);
-                        } else {
-                            leading.style.opacity = targetOpacity; // Ensure final opacity is exactly 1
-                        }
-                    }
-
-                    // Start the animation
-                    requestAnimationFrame(animateOpacity);
-                }
-
-
-
-            } else {
-                // Scrolling up
-                // setShowNavbar(false); // Hide Navbar when scrolling up
-            }
-            setLastScrollTop(currentScrollTop);
-            setScrollPosition(currentScrollTop);
-        };
-
-        window.addEventListener('scroll', handleScroll);
+            }, 2000);
+        }
+    
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            // Clean up the timeout to avoid memory leaks
+            clearTimeout(timeoutId);
         };
-    }, [lastScrollTop]);
+    }, [showAesthetix]);
+    
+    
+
     return (
         <div className='flex justify-center h-[100vh] w-[100%] '>
             <div className='h-[100vh] w-[80px] bg--500 mx-[30px] flex justify-center pt-7 fixed top-2 left-0 '>
@@ -206,21 +133,35 @@ function LandingPage() {
                                 </div>
                                 :
                                 <div className='leading'>
-                                    <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
-                                        <div className='mb-10'>
-                                            <div className=''>Leaders in Smart</div>
-                                            <div className='mt-[-40px]'>Technology Solutions</div>
-                                        </div>
+                                <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
+                                    <div className='mb-10 animate-fade-in'>
+                                    <div>Leaders in Smart</div>
+                                    <div className='mt-[-40px]'>Technology Solutions</div>
                                     </div>
+                                </div>
                                 </div>
                         }
 
 
-                        {showAesthetix && (
-                            <h3 className="aesthetix-text">Aesthetix</h3>
-                        )}
+                {showAesthetix && (
+                    <h3 className="aesthetix-text">Aesthetix</h3>
+                )}
+
+                {
+                    already2 && showAesthetix && (
+                        <div className='leading'>
+                            <div className='gradient-text font-bold text-center flex justify-center items-center'>
+                                <div >
+                                    <div>Leaders in Smart</div>
+                                    <div>Technology Solutions</div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
                     </div>
                     <Narration />
+                    <Narration2 />
                 </div>
 
             </div>

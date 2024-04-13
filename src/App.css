@@ -166,9 +166,11 @@ body{
   --underline-color: hsl(0 0% 50% / 0.15);
   --underline-color-hover: hsl(180 100% 50% / 1);
   --underline-transition: 5s;
-  --finish-fill: hsl(0 0% 100%);
+  --finish-fill: #5A0D57;
   --accent: hsl(0 0% 100%);
-  --fill: hsl(0 0% 50%);
+  --fill: #5A0D57;
+  --underline-color:#761f7357;
+  /*  */
 }
 
 
@@ -183,7 +185,8 @@ p {
 p > span {
 	outline-color: hsl(10 80% 50%);
 	outline-offset: 1ch;
-	font-size: clamp(3rem, 4vw + 0.5rem, 10rem);
+	font-size: 45px;
+  font-weight: 500;
   color: var(--color);
   text-decoration: none;
   background-image:
@@ -213,6 +216,7 @@ section {
 	height: 100vh;
   display: grid;
   place-items: center;
+  transition: all 1s ease-in;
 }
 
 
@@ -342,4 +346,43 @@ section {
 .hover-underline-animation:active{
     transition: all 0.5s;
     transform: scale(0.9);
+}
+
+.leading-text {
+  opacity: 0;
+  font-size: 0px;
+  transition: opacity 1s ease-in-out, font-size 2s ease-in-out;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.leading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ensures the container takes full viewport height */
+
+}
+
+.gradient-text {
+  font-size: 120px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 2s ease-in-out;
 }
