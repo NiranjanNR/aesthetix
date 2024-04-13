@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 import Narration from './ScrollAnimation'
-import Leading from './Leading';
-
+import instagram from '../assets/instagram.png'
+import git from '../assets/git.png'
+import twitter from '../assets/twitter.png'
+import linkedin from '../assets/linkedin.png'
 
 function LandingPage() {
     const [textStates, setTextStates] = useState([
@@ -77,16 +79,15 @@ function LandingPage() {
                 aesthetixTexts.forEach((text) => {
                     text.style.fontSize = '51px'; // Set the desired font size
                     text.style.position = 'fixed'; // Position fixed to top left
-                    text.style.left = '133px';
-                    text.style.top = '40px';
-                    text.style.color = '#A3227F'
+                    text.style.left = '817px';
+                    text.style.top = '60px';
                 });
 
 
                 const app_container = document.querySelector('.app-container');
 
                 if (app_container) {
-                    app_container.style.backgroundColor = '#F7EDE4'
+
                 }
 
                 // Select the element with the class 'navbar'
@@ -172,57 +173,68 @@ function LandingPage() {
         };
     }, [lastScrollTop]);
     return (
-        <div>
-            <div className="app-container overflow-y-auto flex justify-center items-center">
-                <div className="navbar-container" style={{ visibility: showNavbar ? 'visible' : 'hidden' }}>
-                    <div className='navbar text-black md:mx-3'>
-                        <div className='py-4 flex justify-center items-center h-[7vh]'>
-                            <div className='hidden md:flex font-semibold text-md'>
-                                <div>
-                                    <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>About us</button>
-                                </div>
-                                <div>
-                                    <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Discover</button>
-                                </div>
-                                <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Support</button>
-                                <button className='hover:text-[#66146a] px-5 transition-all ease-in-out active:scale-95 hover-underline-animation'>Blog</button>
-                            </div>
-                            <div className='md:hidden'>
-                            </div>
-                        </div>
+        <div className='flex justify-center h-[100vh] w-[100%] '>
+            <div className='h-[100vh] w-[80px] bg--500 mx-[30px] flex justify-center pt-7 fixed top-2 left-0 '>
+                <div className='bg-blac'>
+                    <div className='text-4xl font-bold' >a</div>
+                    <div className='mt-[599px]'>
+                        <div className='mt-[42px]'><button><img src={instagram} className='h-[26px] w-[26px]' alt='' /></button></div>
+                        <div className='mt-[42px]'><button><img src={git} className='h-[26px] w-[26px]' alt='' /></button></div>
+                        <div className='mt-[42px]'><button><img src={twitter} className='h-[26px] w-[26px]' alt='' /></button></div>
+                        <div className='mt-[42px]'><button><img src={linkedin} className='h-[30px] w-[30px]' alt='' /></button></div>
                     </div>
                 </div>
-                {
-                    already ?
-                        <div className="text-container gap-14" >
-                            {textStates.map((textState, index) => (
-                                <h1
-                                    key={index}
-                                    className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
-                                    style={{ transitionDelay: `${index * 0.5}s` }}
-                                >
-                                    <div className='text-8xl font-semibold'>{textState.text}.</div>
-                                </h1>
-                            ))}
-                        </div>
-                        :
-                        <div className='leading'>
-                            <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
-                                <div className='mb-10'>
-                                    <div className=''>Leaders in Smart</div>
-                                    <div className='mt-[-40px]'>Technology Solutions</div>
-                                </div>
-                            </div>
-                        </div>
-                }
-
-
-                {showAesthetix && (
-                    <h3 className="aesthetix-text">Aesthetix</h3>
-                )}
             </div>
-            <Narration />
-        </div>
+            <div className='h-[100vh] w-[88%] mx-[0px]'>
+                <div>
+                    <div className="app-container overflow-y-auto flex justify-center items-center">
+
+                        {
+                            already ?
+                                <div className="text-container gap-14" >
+                                    {textStates.map((textState, index) => (
+                                        <h1
+                                            key={index}
+                                            className={`text-item ${textState.fadeIn ? 'fade-in-active' : ''}`}
+                                            style={{ transitionDelay: `${index * 0.5}s` }}
+                                        >
+                                            <div className='text-8xl font-semibold'>{textState.text}.</div>
+                                        </h1>
+                                    ))}
+                                </div>
+                                :
+                                <div className='leading'>
+                                    <div className='gradient-text h-[100vh] text-[120px] font-bold text-center flex justify-center items-center'>
+                                        <div className='mb-10'>
+                                            <div className=''>Leaders in Smart</div>
+                                            <div className='mt-[-40px]'>Technology Solutions</div>
+                                        </div>
+                                    </div>
+                                </div>
+                        }
+
+
+                        {showAesthetix && (
+                            <h3 className="aesthetix-text">Aesthetix</h3>
+                        )}
+                    </div>
+                    <Narration />
+                </div>
+
+            </div>
+            <div className='h-[100vh] w-[80px] bg--500 mx-[30px] flex justify-center pt-7 fixed top-2 right-0'>
+                <div className=''>
+                    <div className='w-[30px]'>
+                        <button className='text-xs  tracking-wide font-normal text-center hover:text-indigo-600'  >ABOUT</button>
+                        <button className='text-xs tracking-wide font-normal text-center hover:text-indigo-600'  >WORKS</button>
+                        <button className='text-xs tracking-wide font-normal text-center hover:text-indigo-600'  >CONTACT</button>
+                    </div>
+                    <div className='mt-[780px] mr-[40px]'>
+                        <div className=' tracking-wide font-semibold text-md'>Aesth<button className='text-indigo-600/90 hover:text-indigo-700 border-indigo-500 transition-all ease-in-out'></button></div>
+                    </div>
+                </div>
+            </div>
+        </div >
 
     );
 }
